@@ -1,0 +1,355 @@
+<ion-view hide-nav-bar='true'>
+  <ion-content>
+   <ion-refresher on-refresh="doRefresh()">
+                     
+      </ion-refresher>
+    <div class="header"><img src="/img/logo Thumbnail.png" style="height:100px;width:100px;margin-left:4%; ">
+      <div class="btn btn-info btn-lg logout" ng-click="home()">
+        <span class="ion-home"></span>FrontEnd
+      </div>
+      <div class="btn btn-info btn-lg logout" ng-click="logout()">
+        <span class="ion-log-out"></span> Hi {{username}}!
+      </div>
+    </div>
+    <div class="row " style="height:100vh">
+      <div class="col col-20 marginleft background" style="background-color:#c9252c">
+        <ul>
+          <li class="borderadmin">Dashboard</li>
+          <li ng-click="exp()" class="borderadmin">Add Shop</li>
+          <li ng-click="exp1()" class="borderadmin">Add Type</li>
+          <li ng-click="exp2()" class="borderadmin">Add Feedback</li>
+          <li ng-click="exp3()" class="borderadmin">Shop Data Questions</li>
+          <li ng-click="exp4()" class="borderadmin">Shop Data</li>
+          <li ng-click="exp5()" class="borderadmin">Walkin Data</li>
+           <li ng-click="exp6()" class="borderadmin">Materilized Data</li>
+        </ul>
+      </div>
+
+
+      <div class="col col-70">
+        <div style="width:60%" class="borderright" ng-show="expression">
+          <div>
+            <h3 class="headername">Add Shop</h3></div>
+          <form ng-submit="adminshop(data)">
+            <div class="">
+              <label class=" item-input item-floating-label">
+                <span class="input-label">Image Url</span>
+                <input class="borderbottom" type="text" placeholder="Image Url" ng-model="data.url">
+              </label>
+              <label class="item-input item-floating-label ">
+                <span class="input-label">Shop Name</span>
+                <input class="borderbottom" type="text" placeholder="Shop Name" ng-model="data.shopname">
+              </label>
+              <label class="item-input item-floating-label">
+                <span class="input-label">Description</span>
+                <input class="borderbottom" type="text" placeholder="Description" ng-model="data.Description">
+              </label>
+              <label>
+                <button class="buttonColor shopbutton"> Submit</button>
+              </label>
+            </div>
+          </form>
+          {{PostDataResponse}} {{ResponseDetails}}
+        </div>
+        <div  style="width:60%" class="borderright" ng-show="expression1">
+          <div>
+            <h3 class="headername">Add Type</h3></div>
+          <form ng-submit="admintype(data,selectedName)">
+            <div class="list marginright">
+              <div class="list">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    Select Shop Name
+                  </div>
+                  <select ng-model="selectedName" ng-options="item.shopname for item in shopdata">
+                  </select>
+                </label>
+              </div>
+              <label class="item-input item-floating-label">
+                <span class="input-label">Type</span>
+                <input class="borderbottom" type="text" placeholder="Type" ng-model="data.type">
+              </label>
+              <label>
+                <button class="buttonColor shopbutton"> Submit</button>
+              </label>
+            </div>
+          </form>{{PostDataResponse}}
+        </div>
+        <div class="borderright" ng-show="expression2">
+          <div>
+            <h3 class="headername">Add Feedback</h3></div>
+          <form>
+            <div class="list">
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Select Shop Name
+                </div>
+                <select ng-change="typevalue(selectedName)" ng-model="selectedName" ng-options="item.shopname for item in shopdata">
+                </select>
+              </label>
+            </div>
+            <div class="list">
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Select Shop type
+                </div>
+                <select ng-model="selectedtype" ng-options="item for item in optionstype">
+                </select>
+              </label>
+            </div>
+            <br>
+            <div class="list">
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  select
+                </div>
+                <select ng-change="chage(selection)" ng-model="selection" ng-options="choice for choice in choices"></select>
+              </label>
+            </div>
+            <div class="list" ng-show="qun">
+              <label class="item item-input">
+                <input type="text" ng-model="data.questions" placeholder="Enter Question">
+              </label>
+            </div>
+            <div class="row">
+              <label class="item item-input" ng-repeat="item in inputs track by $index" style="margin-right: 3px">
+                <input type="text" ng-model="inputs[$index]" placeholder="Options">
+              </label>
+              <button ng-click="addfield()" class="button button-assertive" ng-show="radioadd">
+                +
+              </button>&nbsp;
+              <button class="button button-assertive" ng-click="remove(item)" ng-show="radioadd">-</button>
+            </div>
+            <button class="button button-calm" ng-click="add(selectedName,selectedtype,data,selection)" style="    float: right;">add</button>
+            <!-- <button class="button button-calm" ng-click="newdatas(inputs)">Submitsss</button> -->
+          </form>
+        </div>
+        <div class="borderrighttable" ng-show="expression3">
+          <div>
+            <h3 class="headername">shop questions</h3></div>
+          <input ng-model="search.shopname" />
+          <div id="table-wrapper">
+            <div id="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>ShopName</th>
+                    <th>Type</th>
+                    <th>Question</th>
+                    <th>Options</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in getshopdata | filter:search | orderBy:orderProp">
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.shopname}}</td>
+                    <td>{{item.selectedtype}}</td>
+                    <td>{{item.questions}}</td>
+                    <td>{{item.options}}</td>
+                    <td>
+
+                     <i class="icon ion-edit" style="border: 1px solid #33cd5f;
+    color: #33cd5f;
+    padding: 1px 5px;     display: inline-block;
+    width: 25px;
+    height: 25px;" ng-click="shopadmin(item)"></i>
+                      <i class="icon ion-trash-b" style="border: 1px solid #ef473a;
+    color:#ef473a;
+    padding: 1px 5px;     display: inline-block;
+    width: 25px;
+    height: 25px;" ng-click="delect(item)"></i>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="borderrighttable" ng-show="expression4">
+          <div>
+            <h3 class="headername">shopsdata</h3></div>
+          <input ng-model="search.shopname" />
+          <div id="table-wrapper">
+            <div id="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>ShopName</th>
+                    <th>Type</th>
+                    <th>Url</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in shopdatatype | filter:search | orderBy:orderProp">
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.shopname}}</td>
+                    <td>{{item.type}}</td>
+                    <td>{{item.url}}</td>
+                    <td>
+                      <i class="icon ion-edit" style="border: 1px solid #33cd5f;
+    color: #33cd5f;
+    padding: 1px 5px;     display: inline-block;
+    width: 25px;
+    height: 25px;" ng-click="shoptype(item)"></i>
+                      <i class="icon ion-trash-b" style="border: 1px solid #ef473a;
+    color:#ef473a;
+    padding: 1px 5px;     display: inline-block;
+    width: 25px;
+    height: 25px;" ng-click="delectshop(item)"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="borderrighttable" ng-show="expression5">
+          <div>
+            <h3 class="headername">WalkinData</h3></div>
+          <input ng-model="search.shopname" />
+          <div id="table-wrapper">
+            <div id="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Customer</th>
+                    <th>Shopname</th>
+                    <th>feedback</th>
+                    <th>RM</th>
+                       <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in walkindata | filter:search | orderBy:orderProp">
+                    <td>{{item.id}}</td>
+                    <td>{{item.customer}}</td>
+                    <td>{{item.shopname}}</td>
+                    <td>
+                      <p ng-repeat="items in item.feedback">{{items.ques}}&nbsp;&nbsp;<strong>{{items.ans}}</strong></p>
+                    </td>
+                    <!-- <td>{{item.feedback}}</td> -->
+                    <td>{{item.rm}}</td>
+                    <td>
+                      <i class="icon ion-edit" style="border: 1px solid #33cd5f;
+    color: #33cd5f;
+    padding: 1px 5px;     display: inline-block;
+    width: 25px;
+    height: 25px;"></i>
+                      <i class="icon ion-trash-b" ng-click="delectWalkIn(item)" style="border: 1px solid #ef473a;
+    color:#ef473a;
+    padding: 1px 5px;     display: inline-block;
+    width: 25px;
+    height: 25px;"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+           <div class="borderrighttable" ng-show="expression6">
+          <div>
+            <h3 class="headername">materialized Data</h3></div>
+          <input ng-model="search.shopname" />
+          <div id="table-wrapper">
+            <div id="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Customer</th>
+                    <th>Shopname</th>
+                    <th>feedback</th>
+                    <th>RM</th>
+                       <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in materialdata | filter:search | orderBy:orderProp">
+                    <td>{{item.id}}</td>
+                    <td>{{item.customer}}</td>
+                    <td>{{item.shopname}}</td>
+                    <td>
+                      <p ng-repeat="items in item.feedback">{{items.ques}}&nbsp;&nbsp;<strong>{{items.ans}}</strong></p>
+                    </td>
+                    <td>{{item.rm}}</td>
+                    <td>
+                      <i class="icon ion-edit" style="border: 1px solid #33cd5f;
+    color: #33cd5f;
+    padding: 1px 5px;     display: inline-block;
+    width: 25px;
+    height: 25px;"></i>
+                      <i class="icon ion-trash-b" style="border: 1px solid #ef473a;
+    color:#ef473a;
+    padding: 1px 5px;     display: inline-block;
+    width: 25px;
+    height: 25px;"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+<script id="shopadmin.html" type="text/ng-template">
+  <ion-modal-view class="walkinModel" style="height: 69vh;">
+    <ion-content class="popupboder" overflow-scroll="false">
+      <div class="list ">
+        <form ng-submit="updatedata(duplicate)">
+          <label class="item item-input item-stacked-label" style="margin-left: 5%;margin-top: 2%;margin-right: 5%;">
+            <span class="input-label">Shopname</span>
+            <input type="text" ng-model="duplicate.shopname" placeholder="John" ng-readonly="true">
+          </label>
+          <label class="item item-input item-stacked-label" style="margin-left: 5%;margin-right: 5%;">
+            <span class="input-label">Question</span>
+            <input type="text" ng-model="duplicate.questions" placeholder="Suhr">
+          </label>
+          <label class="item item-input item-stacked-label" ng-repeat="item in newdata track by $index" style="margin-left: 5%;margin-right: 5%;">
+            <span class="input-label">options{{$index}}</span>
+            <input type="text" ng-model="newdata[$index]" placeholder="options">
+          </label>
+          <button class="button button-assertive" style="float: right;margin-right: 10%;margin-top: 5%;">submit</button>
+        </form>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+<script id="shopatype.html" type="text/ng-template">
+  <ion-modal-view class="walkinModel" style="height: 69vh;">
+    <ion-content class="popupboder" overflow-scroll="false">
+      <div class="list ">
+        <form ng-submit="shoptypeupdate(duplicate)">
+          <label class="item item-input item-stacked-label" style="margin-left: 5%;margin-top: 5%;margin-right: 5%;">
+            <span class="input-label">Shopname</span>
+            <input type="text" ng-model="duplicate.shopname" placeholder="John">
+          </label>
+          <label class="item item-input item-stacked-label" style="margin-left: 5%;margin-right: 5%;">
+            <span class="input-label">Types</span>
+            <input type="text" ng-model="duplicate.type" placeholder="Question">
+          </label>
+          <label class="item item-input item-stacked-label" style="margin-left: 5%;margin-right: 5%;">
+            <span class="input-label">Url</span>
+            <input type="text" ng-model="duplicate.url" placeholder="url">
+          </label>
+          <button class="button button-assertive" style="float: right;margin-right: 10%;margin-top: 5%;">submit</button>
+        </form>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

@@ -1,0 +1,282 @@
+<ion-view hide-nav-bar='true' class="background">
+    <ion-content>
+        <div class="width80 fullwidth">
+            <img class="width" src="/img/Top Banner.jpg">
+            <div class="card bgcolor" ng-show="survey1">
+                <form ng-submit="selectAnswers(selectedtype)">
+                    <div class="item item-text-wrap border0 bgcolor" ng-repeat="itemss in radioques.slice(0,4)">
+                        <h3 ng-model="questions">{{itemss}}</h3>
+                        <label class="radio-inline surveyfont" ng-repeat="radio in radiooptions[$index] ">
+                            <input type="radio" name="selectedtype{{$parent.$index}}"
+                              value="{{radio}}" 
+                              ng-model = "$parent.selectedtype[itemss]" 
+                                
+                       />{{radio}}
+    
+                        </label>
+
+                    </div>
+
+                       
+               
+
+                 
+                
+                    <!-- <div class="item item-text-wrap border0">
+                        <h3>Were you shown all the products to your satisfaction?</h3>
+                        <label class="radio-inline surveyfont">
+                            <input type="radio" name="optradio1" value="1" ng-model="select"> Good
+                        </label>
+                        <label class="radio-inline surveyfont">
+                            <input type="radio" name="optradio1" value="2" ng-model="select"> Average
+                        </label>
+                        <label class="radio-inline surveyfont lastoption">
+                            <input type="radio" name="optradio1" value="3" ng-model="select"> Poor
+                        </label>
+                    </div> -->
+                 <!--    <div class="item item-text-wrap border0">
+                        <h3>was the jewellery / silverware of expected quality?</h3>
+                        <label class="radio-inline surveyfont">
+                            <input type="radio" name="optradio2">Good
+                        </label>
+                        <label class="radio-inline surveyfont">
+                            <input type="radio" name="optradio2">Average
+                        </label>
+                        <label class="radio-inline surveyfont lastoption">
+                            <input type="radio" name="optradio2">Poor
+                        </label>
+                    </div> -->
+                    <label class="item item-input outline bgcolor">
+                        <div class="col"></div>
+                        <button ng-click="page1()" class="buttonColor floatright">Proceed > </button>
+                    </label>
+                </form>
+            </div>
+            <div class="card bgcolor" ng-show="survey2">
+             <div class="item item-text-wrap border0 bgcolor" ng-repeat="itemss in radioques.slice(5,8)">
+                   
+                        <h3 ng-model="questions">{{itemss}}</h3>
+                        <label class="radio-inline surveyfont" ng-repeat="radio in radiooptions[$index+5] ">
+                            <input type="radio" name="selectedtype{{$parent.$index}}"
+                              value="{{radio}}" 
+                              ng-model = "$parent.selectedtype[itemss]" 
+                                
+                       />{{radio}}
+    
+                        </label>
+
+                    </div>
+
+                
+                <!-- <div class="item item-text-wrap border0 bgcolor">
+                    <h3>Did one of our supervisors meet you today?</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio3"> Yes
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio3"> No
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0 bgcolor">
+                    <h3>Did the Showroom Manager/s meet you today?</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio4"> Yes
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio4"> No
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0 bgcolor" style="margin-top: -20px">
+                    <label class="radio-inline surveyfont">
+                        <h3>Name of the person who was very helpful today?</h3>
+                        <h3>Why do you say so? (Give your comments)</h3>
+                        <textarea type="textarea" class="walkinsurvey" style="width:100%" name="">
+                        </textarea>
+                    </label>
+                </div> -->
+                <label class="item item-input outline bgcolor">
+                    <div class="col"></div>
+                    <button ng-click="page2()" class="buttonColor floatright">Proceed > </button>
+                </label>
+            </div>
+            <div class="card" ng-show="survey3">
+
+                <!-- <div class="item item-text-wrap border0">
+                    <h3>Would you recommed us to others</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio4"> Yes
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio4"> No
+                    </label>
+                </div> -->
+               <!--  <div class="item item-text-wrap border0 " style="margin-top: -20px">
+                    <h3>Did you get information on our Gold Standard 1869 Rate Protection Plan (GSTD)</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio5"> Yes
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio5"> No
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0">
+                    <label class="radio-inline surveyfont">
+                        <h3>Is there anything else you wish to share or suggest to us.</h3>
+                        <textarea type="textarea" class="walkin" style="width:100%" name="">
+                        </textarea>
+                    </label>
+                </div>
+                -->
+                      <div class="item item-text-wrap border0 bgcolor" style="margin-top: -20px" ng-repeat="item in questiontype">
+                    <label class="radio-inline surveyfont">
+                        <h3>{{item.questions}}</h3>
+                        <textarea type="textarea" class="walkinsurvey" style="width:100%" ng-model = "$parent.selectedtype[item.questions]" name="">
+                        </textarea>
+                    </label>
+                </div>
+            <!-- {{selectedtype}} -->
+                 <label class="item item-input outline bgcolor">
+                    <div class="col"></div>
+                    <button ng-click="page3()" class="buttonColor floatright">Proceed > </button>
+                </label>
+            </div>
+           <!--  <div class="card thankyou" ng-click="Main()" ng-show="survey4">
+                <div class="item item-text-wrap centertext">
+                    Thank You
+                    <br> for your valuable feedback
+                    <br> Happy Shopping!!!
+                </div>
+                <div class="hrborder"></div>
+                <div class="item item-text-wrap centertext">
+                   If you want to give more
+                    <br> feedback or suggestion
+                    <br> call us on 080 4000 1869
+                </div>
+            </div> -->
+        </div>
+    </ion-content>
+</ion-view>
+
+
+
+
+<!-- demo -->
+<!-- <ion-view hide-nav-bar='true' class="background">
+    <ion-content>
+        <div class="width80">
+            <img class="width" src="/img/Top Banner.jpg">
+            <div class="card" ng-show="survey1">
+                <div class="item item-text-wrap border0">
+                    <h3>How informative was your Relationship Manager today?</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio"> Good
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio"> Average
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio"> Poor
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0">
+                    <h3>Were you shown all the products to your satisfaction?</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio1"> Good
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio1"> Average
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio1"> Poor
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0">
+                    <h3>was the jewellery / silverware of expected quality?</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio2">Good
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio2">Average
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio2">Poor
+                    </label>
+                </div>
+                <label class="item item-input outline">
+                    <div class="col"></div>
+                    <button ng-click="page1()" class="buttonColor floatright">Proceed > </button>
+                </label>
+            </div>
+            <div class="card" ng-show="survey2">
+                <div class="item item-text-wrap border0">
+                    <h3>Did one of our supervisors meet you today?</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio3"> Yes
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio3"> No
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0">
+                    <h3>Did the Showroom Manager/s meet you today?</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio4"> Yes
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio4"> No
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0">
+                    <label class="radio-inline surveyfont">
+                        <h3>Name of the person who was very helpful today?</h3>
+                        <h3>Why do you say so? (Give your comments)</h3>
+                        <textarea type="textarea" class="walkin" style="width:100%" name="">
+                        </textarea>
+                    </label>
+                </div>
+                <label class="item item-input outline">
+                    <div class="col"></div>
+                    <button ng-click="page2()" class="buttonColor floatright">Proceed > </button>
+                </label>
+            </div>
+            <div class="card" ng-show="survey3">
+                <div class="item item-text-wrap border0">
+                    <h3>Would you recommed us to others</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio4"> Yes
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio4"> No
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0">
+                    <h3>Did you get information on our Gold Standard 1869 Rate Protection Plan (GSTD)</h3>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio5"> Yes
+                    </label>
+                    <label class="radio-inline surveyfont">
+                        <input type="radio" name="optradio5"> No
+                    </label>
+                </div>
+                <div class="item item-text-wrap border0">
+                    <label class="radio-inline surveyfont">
+                        <h3>Is there anything else you wish to share or suggest to us.</h3>
+                        <textarea type="textarea" class="walkin" style="width:100%" name="">
+                        </textarea>
+                    </label>
+                </div>
+                <label class="item item-input outline">
+                    <div class="col"></div>
+                    <button ng-click="page3()" class="buttonColor floatright">Proceed > </button>
+                </label>
+            </div>
+            <div class="card" ng-click="Main()" ng-show="survey4">
+                <div class="item item-text-wrap centertext">
+                    Thank You
+                    <br> for your valuable feedback
+                    <br> Happy Shopping!!!
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view> -->

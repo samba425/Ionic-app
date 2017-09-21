@@ -1,0 +1,50 @@
+<ion-view hide-nav-bar='true' class="background">
+    <ion-content>
+        <div class="width80">
+            <img class="width" src="/img/Top Banner.jpg">
+              
+            <!-- demo -->
+            <!-- <div class="width60">
+                <button ng-click="walkInCustomerdemo()" class="buttonoption margin16">
+                    Walk in Customer
+                </button>
+                <button ng-click="showPopupdemo()" class="buttonoption">
+                    Materialised
+                </button>
+            </div> -->
+            <!-- demo end -->
+            <div class="width60" ng-if="options.length == 0">
+                <button class="buttonoption margin16">No Types Avaliable</button>
+            </div>
+            <div class="width60">
+                <span ng-repeat="item in options track by $index" ng-if="$index % 2 === 0">
+  <span ng-if="$index < options.length">
+      <button  ng-click="walkInCustomer(options[$index])" class="buttonoption margin16">{{options[$index]}}</button>
+  </span>
+                <span ng-if="$index + 1 < options.length">          
+                 <button  ng-click="showPopup(options[$index+1])" class="buttonoption margin16">{{options[$index+1]}}</button>
+        </span>
+                </span>
+            </div>
+    </ion-content>
+</ion-view>
+<script id="materialpopup.html" type="text/ng-template">
+    <ion-modal-view class=" minheight  optionspopup bgcolor" style="background-color: #dedede;">
+        <div>
+            <ion-content>
+                <div class="borders bgcolor">
+                    <div class="list">
+                   <form ng-submit="Proceed(invoice)">
+                        <label class="item item-input materialmargin bgcolor">
+                            <span class="input-label inputimage margin0 ">Invoice No.:</span>
+                            <input class="borderpop" ng-model="invoice" type="number"  placeholder="Enter Invoice Number" max="9999999999" >
+                        </label>
+                        
+                        <button  class="buttonColor floatright bgcolor">Proceed > </button>
+            </form>
+                    </div>
+                </div>
+            </ion-content>
+        </div>
+    </ion-modal-view>
+</script>

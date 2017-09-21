@@ -1,0 +1,68 @@
+<ion-view class="background">
+    <ion-content padding=false>
+     <ion-refresher on-refresh="doRefresh()">
+                     
+      </ion-refresher>
+        <div class=" width80m fullwidth">
+          
+            <img class="width" src="/img/Top Banner.jpg" style="vertical-align: top;">
+            <div><img class="width" src="/img/main page banner.jpg"></div>
+            <h3 class="textCenter">FEEDBACK</h3>
+            <img class="Magnificent" src="/img/CKC - 6 Magnificent Showroom.png">
+          <!--   <div class="row">
+                <div class="color col col-32" ui-sref="options">
+                    <img src="/img/HS.jpg" width="100% " />
+                    <h3 class="galleryNames">Heritage Showroom  <span class="floatleft "> ></span> </h3>
+                </div>
+                <div class=" color col col-32 " ui-sref="options ">
+                    <img ng-src="/img/TS.jpg" width="100%" />
+                    <h4 class="galleryNames">The Touchstone <span class="floatleft "> ></span> </h4>
+                </div>
+                <div class="color col col-32 " ui-sref="options ">
+                    <img ng-src="/img/TSS.jpg " width="100%" />
+                    <h4 class="galleryNames">The Touchstone South <span class="floatleft"> ></span></h4>
+                </div>
+            </div>
+            <div class="row ">
+                <div class=" color col col-30 " ui-sref="options">
+                    <img src="/img/TSW.jpg" width="100% " />
+                    <h4 class="galleryNames">The Touchstone West <span class="floatleft "> ></span> </h4>
+                </div>
+                <div class=" color col col-30 " ui-sref="options ">
+                    <img ng-src="/img/TSA.jpg" width="100% " />
+                    <h4 class="galleryNames">The Touchstone Airport <span class="floatleft "> ></span> </h4>
+                </div>
+                <div class="color col col-30" ui-sref="options">
+                    <img ng-src="/img/TSE.png" width="100%" />
+                    <h4 class="galleryNames">The Touchstone East <span class="floatleft"> ></span> </h4>
+                </div>
+            </div> -->
+
+           
+            <div class="row responsive-sm"  ng-repeat="item in shopdata" ng-if="$index % 3 === 0">
+                <div class="color col col-32 mobile mobilelg" ng-if="$index < shopdata.length" ng-click="optionsapage(shopdata[$index])">
+                    <img ng-src="{{shopdata[$index].url}}" width="100%" class="image-sm" />
+                    <h4 class="galleryNames ">{{shopdata[$index].shopname}}<span class="floatleft"> ></span> </h4>
+                </div>
+                <div class="color col col-32 mobile mobilelg" ng-if="$index + 1 < shopdata.length" ng-click="optionsapage(shopdata[$index+1])">
+                    <img ng-src="{{shopdata[$index+1].url}}" width="100%" class="image-sm"/>
+                    <h4 class="galleryNames ">{{shopdata[$index+1].shopname}}<span class="floatleft"> ></span> </h4>
+                </div>
+                <div class="color col col-32 mobile mobilelg" ng-if="$index + 2 < shopdata.length" ng-click="optionsapage(shopdata[$index+2])">
+                    <img ng-src="{{shopdata[$index+2].url}}" width="100%" class="image-sm"/>
+                    <h4 class="galleryNames ">{{shopdata[$index+2].shopname}}<span class="floatleft"> ></span> </h4>
+                </div>
+            </div>
+          
+
+          <!--  <div class="row responsive-sm"  ng-repeat="item in shopdata" ng-if="$index % 3 === 0">
+                <div class="color col col-32 mobile" ng-if="$index < shopdata.length" ng-click="optionsapage(shopdata[$index])">
+                    <img ng-src="{{shopdata[$index].url}}" width="100%" class="image-sm" />
+                    <h4 class="galleryName">{{shopdata[$index].shopname}} &nbsp;&nbsp;&nbsp;&nbsp;<span > ></span> </h4>
+                </div>
+            </div> -->
+
+<!-- <button  ui-sref="admin">admin</button> -->
+        </div>
+    </ion-content>
+</ion-view>
